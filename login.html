@@ -7,8 +7,8 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./assets/style.css">
-    <script src="/Portfolio-architecte-sophie-bluel-master/FrontEnd/assets/Js/login.js" ></script>
-    <title>Document</title>
+    <script defer src="./assets/Js/login.js" ></script>
+    <title>Log in</title>
 </head>
 <body>
     <header>
@@ -17,7 +17,8 @@
             <ul>
                 <li>projets</li>
                 <li>contact</li>
-                <li>login</li>
+                 <li><a href="./index.html">login</a></li>
+                 
                 <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
             </ul>
         </nav>
@@ -25,7 +26,8 @@
     <main>     
         <section id="contact">
             <h2>Log in</h2>
-            <form action="#" method="post">
+            <p class="passwordErr"></p>
+            <form class="login-form" action="#" method="post">
                 <label for="email">Email</label>
                 <input type="email" name="email" id="email">
                 <label for="password">Mot de passe</label>

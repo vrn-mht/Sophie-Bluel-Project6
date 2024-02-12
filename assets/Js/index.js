@@ -67,3 +67,4 @@ document.addEventListener("DOMContentLoaded", async () => {
     await affichageWorks(await getWorks()); // Afficher toutes les œuvres par défaut
     await filterCategory();
 });
+
