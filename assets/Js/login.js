@@ -1,4 +1,4 @@
-// Fonction pour vérifier l'état de connexion et mettre à jour l'interface en conséquence
+// Fonction pour vérifier l'état de connexion et mettre à jour l'interface en conséquence ///
 function checkLoginStatus() {
     const token = localStorage.getItem("token");
     const modeEditionElement = document.getElementById("mode-edition");
@@ -275,3 +275,106 @@ inputFile.addEventListener("change", () => {
   }
 });
 
+// Faire la requête GET à l'API pour récupérer les catégories
+fetch("http://localhost:5678/api/categories")
+  .then(response => response.json()) // Convertir la réponse en JSON
+  .then(data => {
+    // Récupérer le menu déroulant des catégories
+    const categorySelect = document.getElementById("category");
+
+    // Parcourir les données (les catégories)
+    data.forEach(category => {
+      // Créer un nouvel élément d'option
+      const option = document.createElement("option");
+      // Définir la valeur et le texte de l'option avec les données de la catégorie
+      option.value = category.id;
+      option.textContent = category.name;
+      // Ajouter cette option au menu déroulant des catégories
+      categorySelect.appendChild(option);
+    });
+  })
+  .catch(error => {
+    console.error("Erreur lors de la récupération des catégories:", error);
+  });
+
+ 
+  const form = document.querySelector('.form2ndModal');
+const title = document.querySelector('#title');
+const category = document.querySelector('#category');
+const imageInput = document.querySelector('#file');
+const modalButton = document.querySelector('.modalButton'); 
+const gallerynd = document.querySelector('.gallery');
+
+
+
+
+
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    // Vérification du  fichier image,  titre et une catégorie sont sélectionnés
+    if (!imageInput.files[0] || !title.value || !category.value) {
+        alert('Veuillez remplir tous les champs.');
+        return;
+    }
+
+    // Création un objet FormData et ajoutez les données du formulaire
+    const formData = new FormData();
+    formData.append('image', imageInput.files[0]); 
+    formData.append('title', title.value); 
+    formData.append('category', category.value); 
+
+    try {
+        // Récuperation le token d'authentification depuis le localStorage
+        const token = localStorage.getItem('token');
+
+    
+        const response = await fetch('http://localhost:5678/api/works', {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+            body: formData,
+        });
+
+
+        if (response.ok) {
+            const responseData = await response.json();
+
+            // Récuperation l'URL de l'image depuis la réponse JSON
+            const imageUrl = responseData.imageUrl;
+
+        
+            const newImage = document.createElement('img');
+            newImage.src = imageUrl;
+            newImage.alt = 'Aperçu de l\'image ajoutée';
+
+        
+            gallery.appendChild(newImage);
+
+            // Réinitialiser la valeur de l'élément d'entrée de fichier
+            imageInput.value = '';
+
+            // Effacer les champs du formulaire
+            form.reset(); 
+
+            // Fermez la modale
+            modalContainer.style.display = 'none';
+
+
+
+            // Affichez un message de succès
+            alert('Image ajoutée avec succès !');
+
+            imgDisplay();
+            
+        } else {
+            // Gérez les erreurs de la requête
+            alert('Une erreur est survenue lors de l\'envoi de l\'image.');
+        }
+    } catch (error) {
+        // Gérez les erreurs liées à l'envoi de la requête
+        console.error('Erreur lors de l\'envoi de la requête :', error);
+        alert('Une erreur est survenue lors de l\'envoi de l\'image.');
+    }
+});

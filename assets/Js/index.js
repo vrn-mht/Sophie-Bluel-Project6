@@ -7,7 +7,7 @@ async function getWorks() {
 }
 
 // Affichage des works dans le DOM //
-async function affichageWorks(worksArray) {
+ async function affichageWorks(worksArray) {
     gallery.innerHTML = ""; // Vider la galerie avant d'ajouter de nouveaux éléments
     worksArray.forEach((works) => {
         const figure = document.createElement("figure");
@@ -67,4 +67,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     await affichageWorks(await getWorks()); // Afficher toutes les œuvres par défaut
     await filterCategory();
 });
+   
+
+
 
