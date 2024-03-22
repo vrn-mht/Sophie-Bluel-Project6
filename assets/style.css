@@ -248,7 +248,7 @@ footer nav ul {
 }
 .imagesModal {
 	width: 50%;
-	height : 75%;
+	height : 80%;
 	background-color: white;
 	border-radius: 5px;
 	display: flex;
@@ -284,7 +284,7 @@ footer nav ul {
 	gap: 10px;
   }
   .imagesModal .imgGallery figure {
-	width: 20%;
+	width: 18%;
 	height: 30%;
 	position: relative;
   }
@@ -300,8 +300,8 @@ footer nav ul {
 	top: 5px;
 	right: 5px;
 	background-color: black;
-	height: 15px;
-	width: 15px;
+	height: 27px;
+    width: 22px ;
 	cursor: pointer;
   }
   .modalGarage .imgGallery  figure span .fa-trash-can {
