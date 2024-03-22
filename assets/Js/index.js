@@ -67,7 +67,40 @@ document.addEventListener("DOMContentLoaded", async () => {
     await affichageWorks(await getWorks()); // Afficher toutes les œuvres par défaut
     await filterCategory();
 });
-   
+
+// Suppression d'images dans la modale //
+function deleteImages() {
+    const trashAll = document.querySelectorAll(".fa-trash-can");
+  
+    trashAll.forEach((trash) => {
+      trash.addEventListener("click", async (e) => {
+        e.preventDefault();
+        const id = trash.id;
+        const token = window.localStorage.getItem("token");
+        const init = {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+        };
+  
+        try {
+          const response = await fetch(`http://localhost:5678/api/works/${id}`, init);
+          if (!response.status == 204) {
+            console.log("La requête a échoué");
+            return;
+          }
+          // Supprimer l'image de la galerie
+          const imageContainer = trash.parentNode.parentNode; // Accéder au conteneur de l'image
+          imageContainer.remove(); // Supprimer l'élément parent de l'icône de suppression
+        } catch (error) {
+          console.error("Erreur :", error);
+        }
+      });
+    });
+  }
+  affichageWorks();
 
 
 
