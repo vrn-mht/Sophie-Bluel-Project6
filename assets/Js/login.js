@@ -208,10 +208,14 @@ function displayAddModal() {
   btnAddModal.addEventListener("click", () => {
     modalAddImages.style.display = "flex";
     imagesModal.style.display = "none";
+     
+  
   });
   arrowleft.addEventListener("click", () => {
     modalAddImages.style.display = "none";
     imagesModal.style.display = "flex";
+    // Effacer les champs du formulaire
+    form.reset();
   });
   markAdd.addEventListener("click", () => {
     modalContainer.style.display = "none";
@@ -312,9 +316,8 @@ form.addEventListener("submit", async (e) => {
 
       gallery.appendChild(newImage);
 
-      // Effacer les champs du formulaire
-      form.reset();
-      lienImg.src= "#"
+     
+      lienImg.src= ""
 
       // Fermer la modale
       modalContainer.style.display = "none";

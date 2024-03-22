@@ -97,10 +97,11 @@ function deleteImages() {
         } catch (error) {
           console.error("Erreur :", error);
         }
+      
       });
     });
   }
-  affichageWorks();
+  
 
 
 
